@@ -4,6 +4,7 @@ public class PalavraChave {
 
     public PalavraChave(String elemento) {
         this.chave = elemento;
+        this.ocorrencias = new Lista(99);
     }
 
     public String getChave() {

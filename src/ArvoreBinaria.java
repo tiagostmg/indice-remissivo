@@ -98,13 +98,11 @@ public class ArvoreBinaria{
         this.emOrdem(nodo.direito);
     }
 
-    public void insere(String entrada, int linha) {
+    public void insere(String entrada) {
         PalavraChave elemento = busca(entrada);
         if(elemento == null){
             this.insere(entrada, this.raiz);
         }
-        elemento.getOcorrencias().insereFinal(linha);
-
     }
 
     public void insere(String elemento, Nodo nodo) {
@@ -138,6 +136,12 @@ public class ArvoreBinaria{
                 this.insere(elemento, nodo.direito);
             }
         }
+    }
+
+    //TODO
+    public void registrarOcorrencia(String palavra, int linha) {
+        PalavraChave palavraChave = busca(palavra);
+        palavraChave.getOcorrencias().insereFinal(linha);
     }
 
     private Nodo maiorElemento(Nodo nodo) {
@@ -191,7 +195,6 @@ public class ArvoreBinaria{
 
     public PalavraChave busca(String entrada) {
         return this.busca(entrada, this.raiz);
-
     }
 
     public PalavraChave busca(String entrada, Nodo nodo) {
