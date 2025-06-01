@@ -1,12 +1,12 @@
-public class ArvoreBinaria<T> {
+public class ArvoreBinaria{
 
     class Nodo {
 
-        public T elemento;
+        public PalavraChave elemento;
         public Nodo esquerdo;
         public Nodo direito;
 
-        public Nodo(T elemento) {
+        public Nodo(PalavraChave elemento) {
             this.elemento = elemento;
             this.esquerdo = null;
             this.direito = null;
@@ -21,23 +21,12 @@ public class ArvoreBinaria<T> {
         this.nElementos = 0;
     }
 
+    public int tamanho() {
+        return this.nElementos;
+    }
+
     public boolean estaVazia() {
         return this.raiz == null;
-    }
-
-    public void imprimePreOrdem() {
-        this.preOrdem(this.raiz);
-        System.out.println();
-    }
-
-    public void imprimePosOrdem() {
-        this.posOrdem(this.raiz);
-        System.out.println();
-    }
-
-    public void imprimeEmOrdem() {
-        this.emOrdem(this.raiz);
-        System.out.println();
     }
 
     public void imprimeEmLargura() {
@@ -62,6 +51,21 @@ public class ArvoreBinaria<T> {
 
         System.out.println();
 
+    }
+
+    public void imprimePreOrdem() {
+        this.preOrdem(this.raiz);
+        System.out.println();
+    }
+
+    public void imprimePosOrdem() {
+        this.posOrdem(this.raiz);
+        System.out.println();
+    }
+
+    public void imprimeEmOrdem() {
+        this.emOrdem(this.raiz);
+        System.out.println();
     }
 
     public void preOrdem(Nodo nodo) {
@@ -94,84 +98,135 @@ public class ArvoreBinaria<T> {
         this.emOrdem(nodo.direito);
     }
 
-    public Nodo busca(T elemento) {
+    public void insere(String entrada, int linha) {
+        PalavraChave elemento = busca(entrada);
+        if(elemento == null){
+            this.insere(entrada, this.raiz);
+        }
+        elemento.getOcorrencias().insereFinal(linha);
 
-        if (this.estaVazia()) {
+    }
+
+    public void insere(String elemento, Nodo nodo) {
+
+        Nodo novo = new Nodo(new PalavraChave(elemento));
+
+        if (nodo == null) {
+            this.raiz = novo;
+            this.nElementos++;
+            return;
+        }
+
+        int comparacao = novo.elemento.getChave().compareTo(nodo.elemento.getChave());
+
+        if (comparacao < 0) {
+            if (nodo.esquerdo == null) {
+                nodo.esquerdo = novo;
+                this.nElementos++;
+                return;
+            } else {
+                this.insere(elemento, nodo.esquerdo);
+            }
+        }
+
+        if (comparacao > 0) {
+            if (nodo.direito == null) {
+                nodo.direito = novo;
+                this.nElementos++;
+                return;
+            } else {
+                this.insere(elemento, nodo.direito);
+            }
+        }
+    }
+
+    private Nodo maiorElemento(Nodo nodo) {
+        while (nodo.direito != null) {
+            nodo = nodo.direito;
+        }
+        return nodo;
+    }
+
+    private Nodo menorElemento(Nodo nodo) {
+        while (nodo.esquerdo != null) {
+            nodo = nodo.esquerdo;
+        }
+        return nodo;
+    }
+
+    public boolean remove(PalavraChave elemento) {
+        return this.remove(elemento, this.raiz) != null;
+    }
+
+    private Nodo remove(PalavraChave elemento, Nodo nodo) {
+
+        if (nodo == null) {
+            System.out.println("Valor não encontrado");
             return null;
         }
 
-        Pilha<Nodo> pilha = new Pilha<Nodo>();
+        int comparacao = elemento.getChave().compareTo(nodo.elemento.getChave());
 
-        pilha.empilha(this.raiz);
-        while (!pilha.estaVazia()) {
-
-            Nodo cursor = pilha.desempilha();
-
-            if (cursor.elemento.equals(elemento)) {
-                return cursor;
-            }
-
-            if (cursor.esquerdo != null) {
-                pilha.empilha(cursor.esquerdo);
-            }
-
-            if (cursor.direito != null) {
-                pilha.empilha(cursor.direito);
-            }
-        }
-
-        return null;
-    }
-
-    public boolean insereEsquerda(T elemento, T pai) {
-
-        Nodo novo = new Nodo(elemento);
-
-        if (this.estaVazia()) {
-            this.raiz = novo;
-            this.nElementos++;
-            return true;
-        }
-
-        Nodo nodoPai = this.busca(pai);
-        if (nodoPai != null) {
-            if (nodoPai.esquerdo == null) {
-                nodoPai.esquerdo = novo;
-                this.nElementos++;
-                return true;
-            } else {
-                System.out.println("Elemento já tem filho esquerdo!");
-                return false;
-            }
+        if (comparacao < 0) {
+            nodo.esquerdo = this.remove(elemento, nodo.esquerdo);
+        } else if (comparacao > 0) {
+            nodo.direito = this.remove(elemento, nodo.direito);
         } else {
-            System.out.println("Elemento não existe na árvore!");
-            return false;
-        }
-    }
 
-    public boolean insereDireita(T elemento, T pai) {
-
-        Nodo novo = new Nodo(elemento);
-
-        if (this.estaVazia()) {
-            this.raiz = novo;
-            this.nElementos++;
-            return true;
-        }
-
-        Nodo nodoPai = this.busca(pai);
-        if (nodoPai != null) {
-            if (nodoPai.direito == null) {
-                nodoPai.direito = novo;
-                return true;
+            if (nodo.esquerdo == null) {
+                this.nElementos--;
+                return nodo.direito;
+            } else if (nodo.direito == null) {
+                this.nElementos--;
+                return nodo.esquerdo;
             } else {
-                System.out.println("Elemento já tem filho direito!");
-                return false;
+                Nodo substituto = this.menorElemento(nodo.direito);
+                nodo.elemento = substituto.elemento;
+                this.remove(substituto.elemento, nodo.direito);
             }
+        }
+
+        return nodo;
+    }
+
+    public PalavraChave busca(String entrada) {
+        return this.busca(entrada, this.raiz);
+
+    }
+
+    public PalavraChave busca(String entrada, Nodo nodo) {
+
+        if (nodo == null) {
+            return null;
+        }
+
+        int comparacao = entrada.compareTo(nodo.elemento.getChave());
+
+        if (comparacao < 0) {
+            return this.busca(entrada, nodo.esquerdo);
+        } else if (comparacao > 0) {
+            return this.busca(entrada, nodo.direito);
         } else {
-            System.out.println("Elemento não existe na árvore!");
-            return false;
+            return nodo.elemento;
         }
     }
 
+    private int altura(Nodo nodo) {
+
+        if (nodo == null) {
+            return -1;
+        }
+
+        int alturaEsquerda = this.altura(nodo.esquerdo) + 1;
+        int alturaDireita = this.altura(nodo.direito) + 1;
+
+        int altura = alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita;
+
+        return altura;
+
+    }
+
+    public int altura() {
+        return this.altura(this.raiz);
+    }
 }

@@ -1,15 +1,20 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
-        TabelaHash tabelaHash = new TabelaHash(29);
+        Scanner sc = new Scanner(System.in);
 
-        //tabelaHash.insere();
+        TabelaHash hash = new TabelaHash(26);
 
-    }
+        //palavras chave
+        for (int i = 1; sc.hasNextLine(); i++) {
+            String linha = sc.nextLine();
+            String[] palavras = linha.trim().split(" ");
+            for(String palavra : palavras) {
+                hash.insere(palavra, i);
+            }
+        }
 
-
-    //
-    private static int hash(String string) {
-        return string.toLowerCase().charAt(0) - 'a';
     }
 }

@@ -1,10 +1,10 @@
 public class TabelaHash {
 
-    public Integer vetor[];
+    public ArvoreBinaria vetor[];
     public int nElementos;
 
     public TabelaHash(int capacidade) {
-        this.vetor = new Integer[capacidade];
+        this.vetor = new ArvoreBinaria[capacidade];
         this.nElementos = 0;
     }
 
@@ -19,25 +19,44 @@ public class TabelaHash {
         }
     }
 
-    private int funcaoHashDiv(Integer elemento) {
-        return elemento % this.vetor.length;
+    //entrada e retorno tem que ser string ?
+
+    public int hash(String string) {
+        return string.charAt(0) - 'a';
     }
 
-    public Integer busca(int elemento) {
-        int chave = funcaoHashDiv(elemento);
+    public ArvoreBinaria busca(String elemento) {
+        int chave = hash(elemento);
         return this.vetor[chave];
     }
 
-    public void insere(Integer elemento) {
-        int chave = funcaoHashDiv(elemento);
-        this.vetor[chave] = elemento;
+    public void insere(String palavraChave, int linha) {
+        int chave = hash(palavraChave);
+
+        if(this.vetor[chave] == null) {
+            this.vetor[chave] = new ArvoreBinaria();
+        }
+
+        this.vetor[chave].insere(palavraChave, linha);
+
         this.nElementos++;
     }
 
-    public void remove(int elemento) {
-        int chave = funcaoHashDiv(elemento);
+    public void remove(PalavraChave elemento) {
+        int chave = hash(elemento.getChave());
         this.vetor[chave] = null;
         this.nElementos--;
     }
 
+
+    private static String normaliza(String texto) {
+        texto = texto.toLowerCase();
+
+        texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
+        texto = texto.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+
+        texto = texto.replaceAll("[^a-z0-9-]", "");
+
+        return texto;
+    }
 }
