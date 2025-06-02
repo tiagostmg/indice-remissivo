@@ -51,6 +51,8 @@ public class TabelaHash {
             this.vetor[chave] = new ArvoreBinaria();
         }
 
+        palavraChave = normaliza(palavraChave);
+
         this.vetor[chave].insere(palavraChave);
 
         this.nElementos++;

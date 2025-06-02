@@ -1,3 +1,7 @@
-O copo de água estava perigosamente perto do mouse.
-Sem perceber, derrubei tudo e cabo molhei o cabo do computador.
-Agora, torço para que nada mouse, água, tenha mouse queimado com o susto.
+Good programming is not learned from
+generalities, but by seeing how significant
+programs can be made clean, easy to
+read, easy to maintain and modify,
+human-engineered, efficient, and reliable,
+by the application of common sense and
+by the use of good programming practices.
