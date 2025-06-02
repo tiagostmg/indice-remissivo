@@ -1,4 +1,4 @@
-public class ArvoreBinaria{
+public class ArvoreBinariaBusca {
 
     class Nodo {
 
@@ -16,7 +16,7 @@ public class ArvoreBinaria{
     public Nodo raiz;
     public int nElementos;
 
-    public ArvoreBinaria() {
+    public ArvoreBinariaBusca() {
         this.raiz = null;
         this.nElementos = 0;
     }

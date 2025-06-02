@@ -1,10 +1,10 @@
 public class TabelaHash {
 
-    public ArvoreBinaria vetor[];
+    public ArvoreBinariaBusca vetor[];
     public int nElementos;
 
     public TabelaHash(int capacidade) {
-        this.vetor = new ArvoreBinaria[capacidade];
+        this.vetor = new ArvoreBinariaBusca[capacidade];
         this.nElementos = 0;
     }
 
@@ -32,7 +32,7 @@ public class TabelaHash {
         return string.charAt(0) - 'a';
     }
 
-    public ArvoreBinaria busca(String elemento) {
+    public ArvoreBinariaBusca busca(String elemento) {
         int chave = hash(elemento);
         if(chave == -1){
             return null;
@@ -48,7 +48,7 @@ public class TabelaHash {
         }
 
         if(this.vetor[chave] == null) {
-            this.vetor[chave] = new ArvoreBinaria();
+            this.vetor[chave] = new ArvoreBinariaBusca();
         }
 
         palavraChave = normaliza(palavraChave);
