@@ -13,26 +13,39 @@ public class TabelaHash {
     }
 
     public void imprime() {
-        System.out.println("Chave\tValor");
+        System.out.println("Chave\tOcorrencias");
         for (int i = 0; i < vetor.length; i++) {
-            System.out.println(i + " -->\t[ ");
-            vetor[i].imprimeEmOrdem();
-            System.out.println(" ]");
+            System.out.println("-----");
+            System.out.println(i + " ");
+            if(vetor[i] != null) {
+                vetor[i].imprimeEmOrdem();
+            }
         }
+        System.out.println("-----");
     }
 
     public int hash(String string) {
         string = normaliza(string);
+        if(string.isEmpty()){
+            return -1;
+        }
         return string.charAt(0) - 'a';
     }
 
     public ArvoreBinaria busca(String elemento) {
         int chave = hash(elemento);
+        if(chave == -1){
+            return null;
+        }
         return this.vetor[chave];
     }
 
     public void insere(String palavraChave) {
         int chave = hash(palavraChave);
+
+        if(chave == -1){
+            return;
+        }
 
         if(this.vetor[chave] == null) {
             this.vetor[chave] = new ArvoreBinaria();
@@ -45,16 +58,19 @@ public class TabelaHash {
 
     public void registrarOcorrencia(String palavraChave, int linha) {
         int chave = hash(palavraChave);
+        if(chave == -1){
+            return;
+        }
         if(this.vetor[chave] != null) {
             this.vetor[chave].registrarOcorrencia(palavraChave, linha);
         }
     }
 
-    public void remove(PalavraChave elemento) {
-        int chave = hash(elemento.getChave());
-        this.vetor[chave] = null;
-        this.nElementos--;
-    }
+//    public void remove(PalavraChave elemento) {
+//        int chave = hash(elemento.getChave());
+//        this.vetor[chave] = null;
+//        this.nElementos--;
+//    }
 
 
     private static String normaliza(String texto) {

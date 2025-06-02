@@ -11,15 +11,12 @@ public class PalavraChave {
         return chave;
     }
 
-    public void setChave(String chave) {
-        this.chave = chave;
-    }
-
     public Lista getOcorrencias() {
         return ocorrencias;
     }
 
-    public void setOcorrencias(Lista ocorrencias) {
-        this.ocorrencias = ocorrencias;
+    @Override
+    public String toString() {
+        return chave + " : " + ocorrencias.toString();
     }
 }

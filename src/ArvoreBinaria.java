@@ -94,7 +94,7 @@ public class ArvoreBinaria{
             return;
 
         this.emOrdem(nodo.esquerdo);
-        System.out.print(nodo.elemento + " ");
+        System.out.print(nodo.elemento.toString() + " ");
         this.emOrdem(nodo.direito);
     }
 

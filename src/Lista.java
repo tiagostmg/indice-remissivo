@@ -21,6 +21,15 @@ class Lista {
         System.out.println("]");
     }
 
+    @Override
+    public String toString() {
+        String retorno = " ";
+        for (int i = 0; i < this.nElementos; i++) {
+            retorno += this.vetor[i] + " ";
+        }
+        return retorno;
+    }
+
     public boolean estaVazia() {
         return this.nElementos == 0;
     }

@@ -6,35 +6,44 @@ public class Main {
     public static void main(String[] args) {
         TabelaHash hash = new TabelaHash(26);
 
-        // Lê as palavras-chave do arquivo input.txt
+        // Lê as palavras-chave do arquivo palavras-chave.txt
         try {
-            File arquivo = new File("input.txt");
-            Scanner fileScanner = new Scanner(arquivo);
+            File arquivoPalavras = new File("palavras-chave.txt");
+            Scanner scannerPalavras = new Scanner(arquivoPalavras);
 
-            while (fileScanner.hasNextLine()) {
-                String linha = fileScanner.nextLine();
+            while (scannerPalavras.hasNextLine()) {
+                String linha = scannerPalavras.nextLine();
                 String[] palavras = linha.trim().split(" ");
                 for (String palavra : palavras) {
                     hash.insere(palavra);
                 }
             }
 
-            fileScanner.close();
+            scannerPalavras.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo input.txt não encontrado.");
+            System.out.println("Arquivo palavras-chave.txt não encontrado.");
             return;
         }
 
-        // Leitura das linhas com ocorrências via entrada padrão
-        Scanner sc = new Scanner(System.in);
-        int linhaNum = 1;
-        while (sc.hasNextLine()) {
-            String linha = sc.nextLine();
-            String[] palavras = linha.trim().split(" ");
-            for (String palavra : palavras) {
-                hash.registrarOcorrencia(palavra, linhaNum);
+        // Agora lê o arquivo texto.txt
+        try {
+            File arquivoTexto = new File("texto.txt");
+            Scanner scannerTexto = new Scanner(arquivoTexto);
+
+            int linhaNum = 1;
+            while (scannerTexto.hasNextLine()) {
+                String linha = scannerTexto.nextLine();
+                String[] palavras = linha.trim().split(" ");
+                for (String palavra : palavras) {
+                    hash.registrarOcorrencia(palavra, linhaNum);
+                }
+                linhaNum++;
             }
-            linhaNum++;
+
+            scannerTexto.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo texto.txt não encontrado.");
+            return;
         }
 
         hash.imprime();
