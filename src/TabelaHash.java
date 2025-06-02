@@ -1,3 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class TabelaHash {
 
     public ArvoreBinariaBusca vetor[];
@@ -13,15 +17,23 @@ public class TabelaHash {
     }
 
     public void imprime() {
-        System.out.println("Chave\tOcorrencias");
-        for (int i = 0; i < vetor.length; i++) {
-            System.out.println("-----");
-            System.out.println(i + " ");
-            if(vetor[i] != null) {
-                vetor[i].imprimeEmOrdem();
+        try (PrintWriter writer = new PrintWriter(new FileWriter("output.txt"))) {
+            for (int i = 0; i < vetor.length; i++) {
+                if (vetor[i] != null && !vetor[i].estaVazia()) {
+                    imprimeArvoreEmOrdem(vetor[i].raiz, writer);
+                }
             }
+        } catch (IOException e) {
+            System.err.println("Erro ao escrever no arquivo de saída: " + e.getMessage());
         }
-        System.out.println("-----");
+    }
+
+    private void imprimeArvoreEmOrdem(ArvoreBinariaBusca.Nodo nodo, PrintWriter writer) {
+        if (nodo == null) return;
+
+        imprimeArvoreEmOrdem(nodo.esquerdo, writer);
+        writer.println(nodo.elemento);
+        imprimeArvoreEmOrdem(nodo.direito, writer);
     }
 
     public int hash(String string) {

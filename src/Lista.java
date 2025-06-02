@@ -23,9 +23,9 @@ class Lista {
 
     @Override
     public String toString() {
-        String retorno = " ";
+        String retorno = "";
         for (int i = 0; i < this.nElementos; i++) {
-            retorno += this.vetor[i] + " ";
+            retorno += " " + this.vetor[i];
         }
         return retorno;
     }

@@ -17,6 +17,6 @@ public class PalavraChave {
 
     @Override
     public String toString() {
-        return chave + " : " + ocorrencias.toString();
+        return chave + ocorrencias.toString();
     }
 }
