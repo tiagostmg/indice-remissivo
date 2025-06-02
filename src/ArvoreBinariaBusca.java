@@ -21,6 +21,79 @@ public class ArvoreBinariaBusca {
         this.nElementos = 0;
     }
 
+
+    public PalavraChave busca(String entrada) {
+        return this.busca(entrada, this.raiz);
+    }
+
+    public PalavraChave busca(String entrada, Nodo nodo) {
+
+        if (nodo == null) {
+            return null;
+        }
+
+        int comparacao = entrada.compareTo(nodo.elemento.getChave());
+
+        if (comparacao < 0) {
+            return this.busca(entrada, nodo.esquerdo);
+        } else if (comparacao > 0) {
+            return this.busca(entrada, nodo.direito);
+        } else {
+            return nodo.elemento;
+        }
+    }
+
+    public void insere(String entrada) {
+        PalavraChave elemento = busca(entrada);
+        if(elemento == null){
+            this.insere(entrada, this.raiz);
+        }
+    }
+
+    public void insere(String elemento, Nodo nodo) {
+
+        Nodo novo = new Nodo(new PalavraChave(elemento));
+
+        if (nodo == null) {
+            this.raiz = novo;
+            this.nElementos++;
+            return;
+        }
+
+        int comparacao = novo.elemento.getChave().compareTo(nodo.elemento.getChave());
+
+        if (comparacao < 0) {
+            if (nodo.esquerdo == null) {
+                nodo.esquerdo = novo;
+                this.nElementos++;
+                return;
+            } else {
+                this.insere(elemento, nodo.esquerdo);
+            }
+        }
+
+        if (comparacao > 0) {
+            if (nodo.direito == null) {
+                nodo.direito = novo;
+                this.nElementos++;
+                return;
+            } else {
+                this.insere(elemento, nodo.direito);
+            }
+        }
+    }
+
+    public void registrarOcorrencia(String palavra, int linha) {
+        PalavraChave palavraChave = busca(palavra);
+        if(palavraChave != null){
+            Lista ocorrencias = palavraChave.getOcorrencias();
+            if(ocorrencias.contem(linha)){
+                return;
+            }
+            ocorrencias.insereFinal(linha);
+        }
+    }
+
     public int tamanho() {
         return this.nElementos;
     }
@@ -31,7 +104,7 @@ public class ArvoreBinariaBusca {
 
     public void imprimeEmLargura() {
 
-        Fila<Nodo> fila = new Fila<Nodo>();
+        Fila<Nodo> fila = new Fila<>();
 
         fila.enfileira(this.raiz);
         while (!fila.estaVazia()) {
@@ -98,57 +171,6 @@ public class ArvoreBinariaBusca {
         this.emOrdem(nodo.direito);
     }
 
-    public void insere(String entrada) {
-        PalavraChave elemento = busca(entrada);
-        if(elemento == null){
-            this.insere(entrada, this.raiz);
-        }
-    }
-
-    public void insere(String elemento, Nodo nodo) {
-
-        Nodo novo = new Nodo(new PalavraChave(elemento));
-
-        if (nodo == null) {
-            this.raiz = novo;
-            this.nElementos++;
-            return;
-        }
-
-        int comparacao = novo.elemento.getChave().compareTo(nodo.elemento.getChave());
-
-        if (comparacao < 0) {
-            if (nodo.esquerdo == null) {
-                nodo.esquerdo = novo;
-                this.nElementos++;
-                return;
-            } else {
-                this.insere(elemento, nodo.esquerdo);
-            }
-        }
-
-        if (comparacao > 0) {
-            if (nodo.direito == null) {
-                nodo.direito = novo;
-                this.nElementos++;
-                return;
-            } else {
-                this.insere(elemento, nodo.direito);
-            }
-        }
-    }
-
-    public void registrarOcorrencia(String palavra, int linha) {
-        PalavraChave palavraChave = busca(palavra);
-        if(palavraChave != null){
-            Lista ocorrencias = palavraChave.getOcorrencias();
-            if(ocorrencias.contem(linha)){
-                return;
-            }
-            ocorrencias.insereFinal(linha);
-        }
-    }
-
     private Nodo maiorElemento(Nodo nodo) {
         while (nodo.direito != null) {
             nodo = nodo.direito;
@@ -197,28 +219,6 @@ public class ArvoreBinariaBusca {
 
         return nodo;
     }
-
-    public PalavraChave busca(String entrada) {
-        return this.busca(entrada, this.raiz);
-    }
-
-    public PalavraChave busca(String entrada, Nodo nodo) {
-
-        if (nodo == null) {
-            return null;
-        }
-
-        int comparacao = entrada.compareTo(nodo.elemento.getChave());
-
-        if (comparacao < 0) {
-            return this.busca(entrada, nodo.esquerdo);
-        } else if (comparacao > 0) {
-            return this.busca(entrada, nodo.direito);
-        } else {
-            return nodo.elemento;
-        }
-    }
-
     private int altura(Nodo nodo) {
 
         if (nodo == null) {

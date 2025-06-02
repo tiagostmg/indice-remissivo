@@ -28,7 +28,6 @@ public class Main {
             scannerPalavras.close();
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo palavras-chave.txt não encontrado.");
-            return;
         }
     }
 
@@ -40,6 +39,7 @@ public class Main {
             int linhaNum = 1;
             while (scannerTexto.hasNextLine()) {
                 String linha = scannerTexto.nextLine();
+//                if(linha.trim().isEmpty()) continue;
                 String[] palavras = linha.trim().split(" ");
                 for (String palavra : palavras) {
                     hash.registrarOcorrencia(palavra, linhaNum);
@@ -50,7 +50,6 @@ public class Main {
             scannerTexto.close();
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo texto.txt não encontrado.");
-            return;
         }
     }
 }

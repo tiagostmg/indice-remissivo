@@ -1,1 +1,5 @@
-programming, programs, easy, by, human-engineered, and, be, to,
+programming, code, algorithms, data, structures, software, development,
+computer, science, clean, readable, maintainable, efficient,
+reliable, human-engineered, practices, debugging, testing,
+optimization, performance, logic, abstraction, modularity,
+documentation, version, control, collaboration, agile, scrum
