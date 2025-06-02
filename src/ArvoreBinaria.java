@@ -138,10 +138,11 @@ public class ArvoreBinaria{
         }
     }
 
-    //TODO
     public void registrarOcorrencia(String palavra, int linha) {
         PalavraChave palavraChave = busca(palavra);
-        palavraChave.getOcorrencias().insereFinal(linha);
+        if(palavraChave != null){
+            palavraChave.getOcorrencias().insereFinal(linha);
+        }
     }
 
     private Nodo maiorElemento(Nodo nodo) {

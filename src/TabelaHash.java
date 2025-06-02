@@ -22,6 +22,7 @@ public class TabelaHash {
     }
 
     public int hash(String string) {
+        string = normaliza(string);
         return string.charAt(0) - 'a';
     }
 
