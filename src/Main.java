@@ -6,7 +6,6 @@ public class Main {
     public static void main(String[] args) {
         TabelaHash hash = new TabelaHash(26);
 
-        // Lê as palavras-chave do arquivo palavras-chave.txt
         try {
             File arquivoPalavras = new File("palavras-chave.txt");
             Scanner scannerPalavras = new Scanner(arquivoPalavras);
@@ -25,7 +24,6 @@ public class Main {
             return;
         }
 
-        // Agora lê o arquivo texto.txt
         try {
             File arquivoTexto = new File("texto.txt");
             Scanner scannerTexto = new Scanner(arquivoTexto);

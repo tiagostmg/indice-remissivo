@@ -141,7 +141,11 @@ public class ArvoreBinaria{
     public void registrarOcorrencia(String palavra, int linha) {
         PalavraChave palavraChave = busca(palavra);
         if(palavraChave != null){
-            palavraChave.getOcorrencias().insereFinal(linha);
+            Lista ocorrencias = palavraChave.getOcorrencias();
+            if(ocorrencias.contem(linha)){
+                return;
+            }
+            ocorrencias.insereFinal(linha);
         }
     }
 

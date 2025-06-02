@@ -61,6 +61,7 @@ public class TabelaHash {
         if(chave == -1){
             return;
         }
+        palavraChave = normaliza(palavraChave);
         if(this.vetor[chave] != null) {
             this.vetor[chave].registrarOcorrencia(palavraChave, linha);
         }
@@ -73,12 +74,19 @@ public class TabelaHash {
 //    }
 
 
-    private static String normaliza(String texto) {
+    private String normaliza(String texto) {
+        if (texto == null || texto.isEmpty()) {
+            return "";
+        }
+
+        // Converte para minúsculas
         texto = texto.toLowerCase();
 
+        // Remove acentos e caracteres especiais
         texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
-        texto = texto.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        texto = texto.replaceAll("\\p{M}", "");
 
+        // Remove pontuação no final da palavra (como vírgulas, pontos, etc.)
         texto = texto.replaceAll("[^a-z0-9-]", "");
 
         return texto;
