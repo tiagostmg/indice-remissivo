@@ -6,6 +6,13 @@ public class Main {
     public static void main(String[] args) {
         TabelaHash hash = new TabelaHash(26);
 
+        lerPalavrasChave(hash);
+        lerTexto(hash);
+
+        hash.imprime();
+    }
+
+    private static void lerPalavrasChave(TabelaHash hash) {
         try {
             File arquivoPalavras = new File("palavras-chave.txt");
             Scanner scannerPalavras = new Scanner(arquivoPalavras);
@@ -23,7 +30,9 @@ public class Main {
             System.out.println("Arquivo palavras-chave.txt não encontrado.");
             return;
         }
+    }
 
+    private static void lerTexto(TabelaHash hash) {
         try {
             File arquivoTexto = new File("texto.txt");
             Scanner scannerTexto = new Scanner(arquivoTexto);
@@ -43,8 +52,5 @@ public class Main {
             System.out.println("Arquivo texto.txt não encontrado.");
             return;
         }
-
-        hash.imprime();
     }
-
 }

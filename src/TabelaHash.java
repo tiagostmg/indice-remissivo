@@ -18,9 +18,9 @@ public class TabelaHash {
 
     public void imprime() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("output.txt"))) {
-            for (int i = 0; i < vetor.length; i++) {
-                if (vetor[i] != null && !vetor[i].estaVazia()) {
-                    imprimeArvoreEmOrdem(vetor[i].raiz, writer);
+            for (ArvoreBinariaBusca arvoreBinariaBusca : vetor) {
+                if (arvoreBinariaBusca != null && !arvoreBinariaBusca.estaVazia()) {
+                    imprimeArvoreEmOrdem(arvoreBinariaBusca.raiz, writer);
                 }
             }
         } catch (IOException e) {
