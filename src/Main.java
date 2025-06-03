@@ -42,7 +42,7 @@ public class Main {
 //                if(linha.trim().isEmpty()) continue;
                 String[] palavras = linha.trim().split(" ");
                 for (String palavra : palavras) {
-                    hash.registrarOcorrencia(palavra, linhaNum);
+                    hash.buscarPalavraChaveERegistrarOcorrencia(palavra, linhaNum);
                 }
                 linhaNum++;
             }

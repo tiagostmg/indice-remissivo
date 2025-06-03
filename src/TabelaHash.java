@@ -38,7 +38,7 @@ public class TabelaHash {
         this.nElementos++;
     }
 
-    public void registrarOcorrencia(String palavraChave, int linha) {
+    public void buscarPalavraChaveERegistrarOcorrencia(String palavraChave, int linha) {
         int chave = hash(palavraChave);
         if(chave == -1){
             return;
