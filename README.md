@@ -4,14 +4,14 @@
 #### Disciplina: Estrutura de Dados
 
 
-#### Este projeto implementa um índice remissivo que mapeia palavras-chave de um texto e registra em quais linhas elas aparecem. Foi desenvolvido em Java utilizando estruturas como Tabela Hash e Árvore Binária de Busca e Lista para armazenamento e recuperação eficiente dos dados.
+#### Este projeto implementa um índice remissivo que mapeia palavras-chave de um texto e registra em quais linhas elas aparecem. Foi desenvolvido em Java utilizando estruturas como Tabela Hash, Árvore Binária de Busca e Lista Encadeada para armazenamento e recuperação eficiente dos dados.
 
 ### 📌 Funcionalidades
 
 * ✔ Leitura de palavras-chave (arquivo palavras-chave.txt)
 * ✔ Processamento de texto (arquivo texto.txt)
 * ✔ Registro de ocorrências (linhas onde cada palavra aparece)
-* ✔ Geração de saída (arquivo output.txt)
+* ✔ Geração do índice remissivo (arquivo output.txt)
 
 
 ### ⚙️ Estruturas Utilizadas
@@ -19,17 +19,15 @@ Estrutura	| Função no Projeto
 -------------- | -----------
 Tabela Hash	| Mapeia cada letra inicial para uma árvore de palavras
 Árvore Binária	| Armazena palavras-chave em ordem alfabética
-Lista	| Guarda os números das linhas de ocorrência
+Lista	Encadeada | Guarda os números das linhas de ocorrência
 ### 📂 Organização do Código
 
 ```
 src/  
 ├── ArvoreBinariaBusca.java  # Árvore para armazenar palavras  
-├── Fila.java                # Implementação auxiliar (não usada diretamente)  
-├── Lista.java               # Lista de ocorrências (linhas)  
+├── ListaEncadeada.java               # Lista de ocorrências (linhas)  
 ├── Main.java                # Ponto de entrada do programa  
-├── PalavraChave.java        # Modelo palavra + linhas  
-├── Pilha.java               # Implementação auxiliar (não usada diretamente)  
+├── PalavraChave.java        # Model palavra + linhas  
 └── TabelaHash.java          # Tabela Hash principal  
 ```
 
