@@ -1,5 +1,4 @@
 import java.io.PrintWriter;
-import java.io.Writer;
 
 public class ArvoreBinariaBusca {
 

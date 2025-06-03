@@ -20,10 +20,6 @@ public class ListaEncadeada {
         this.nElementos = 0;
     }
 
-    public int tamanho() {
-        return this.nElementos;
-    }
-
     public boolean estaVazia() {
         return this.inicio == null;
     }
@@ -31,12 +27,12 @@ public class ListaEncadeada {
     @Override
     public String toString() {
         Nodo cursor = this.inicio;
-        String retorno = "";
+        StringBuilder retorno = new StringBuilder();
         while (cursor != null) {
-            retorno += " " + cursor.elemento;
+            retorno.append(" ").append(cursor.elemento);
             cursor = cursor.proximo;
         }
-        return retorno;
+        return retorno.toString();
     }
 
     public void insereFinal(int elemento) {
