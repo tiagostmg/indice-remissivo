@@ -55,14 +55,11 @@ public class TabelaHash {
             return "";
         }
 
-        // Converte para minúsculas
         texto = texto.toLowerCase();
 
-        // Remove acentos e caracteres especiais
         texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
         texto = texto.replaceAll("\\p{M}", "");
 
-        // Remove pontuação no final da palavra (como vírgulas, pontos, etc.)
         texto = texto.replaceAll("[^a-z0-9-]", "");
 
         return texto;
@@ -72,38 +69,11 @@ public class TabelaHash {
         try (PrintWriter writer = new PrintWriter(new FileWriter("output.txt"))) {
             for (ArvoreBinariaBusca arvoreBinariaBusca : vetor) {
                 if (arvoreBinariaBusca != null && !arvoreBinariaBusca.estaVazia()) {
-                    imprimeArvoreEmOrdem(arvoreBinariaBusca.raiz, writer);
+                    arvoreBinariaBusca.imprimeEmOrdem(writer);
                 }
             }
         } catch (IOException e) {
             System.err.println("Erro ao escrever no arquivo de saída: " + e.getMessage());
         }
     }
-
-    private void imprimeArvoreEmOrdem(ArvoreBinariaBusca.Nodo nodo, PrintWriter writer) {
-        if (nodo == null) return;
-
-        imprimeArvoreEmOrdem(nodo.esquerdo, writer);
-        writer.println(nodo.elemento);
-        imprimeArvoreEmOrdem(nodo.direito, writer);
-    }
-
-    public ArvoreBinariaBusca busca(String elemento) {
-        int chave = hash(elemento);
-        if(chave == -1){
-            return null;
-        }
-        return this.vetor[chave];
-    }
-
-//    public void remove(PalavraChave elemento) {
-//        int chave = hash(elemento.getChave());
-//        this.vetor[chave] = null;
-//        this.nElementos--;
-//    }
-
-    public int tamanho() {
-        return this.nElementos;
-    }
-
 }

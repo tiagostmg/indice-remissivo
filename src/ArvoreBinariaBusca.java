@@ -1,6 +1,9 @@
+import java.io.PrintWriter;
+import java.io.Writer;
+
 public class ArvoreBinariaBusca {
 
-    class Nodo {
+    static class Nodo {
 
         public PalavraChave elemento;
         public Nodo esquerdo;
@@ -76,7 +79,6 @@ public class ArvoreBinariaBusca {
             if (nodo.direito == null) {
                 nodo.direito = novo;
                 this.nElementos++;
-                return;
             } else {
                 this.insere(elemento, nodo.direito);
             }
@@ -86,7 +88,7 @@ public class ArvoreBinariaBusca {
     public void registrarOcorrencia(String palavra, int linha) {
         PalavraChave palavraChave = busca(palavra);
         if(palavraChave != null){
-            Lista ocorrencias = palavraChave.getOcorrencias();
+            ListaEncadeada ocorrencias = palavraChave.getOcorrencias();
             if(ocorrencias.contem(linha)){
                 return;
             }
@@ -94,147 +96,19 @@ public class ArvoreBinariaBusca {
         }
     }
 
-    public int tamanho() {
-        return this.nElementos;
-    }
-
     public boolean estaVazia() {
         return this.raiz == null;
     }
 
-    public void imprimeEmLargura() {
-
-        Fila<Nodo> fila = new Fila<>();
-
-        fila.enfileira(this.raiz);
-        while (!fila.estaVazia()) {
-
-            Nodo cursor = fila.desenfileira();
-
-            System.out.print(cursor.elemento + " ");
-
-            if (cursor.esquerdo != null) {
-                fila.enfileira(cursor.esquerdo);
-            }
-
-            if (cursor.direito != null) {
-                fila.enfileira(cursor.direito);
-            }
-        }
-
-        System.out.println();
-
+    public void imprimeEmOrdem(PrintWriter writer) {
+        this.emOrdem(this.raiz, writer);
     }
 
-    public void imprimePreOrdem() {
-        this.preOrdem(this.raiz);
-        System.out.println();
-    }
+    public void emOrdem(Nodo nodo, PrintWriter writer) {
+        if (nodo == null) return;
 
-    public void imprimePosOrdem() {
-        this.posOrdem(this.raiz);
-        System.out.println();
-    }
-
-    public void imprimeEmOrdem() {
-        this.emOrdem(this.raiz);
-        System.out.println();
-    }
-
-    public void preOrdem(Nodo nodo) {
-
-        if (nodo == null)
-            return;
-
-        System.out.print(nodo.elemento + " ");
-        this.preOrdem(nodo.esquerdo);
-        this.preOrdem(nodo.direito);
-    }
-
-    public void posOrdem(Nodo nodo) {
-
-        if (nodo == null)
-            return;
-
-        this.posOrdem(nodo.esquerdo);
-        this.posOrdem(nodo.direito);
-        System.out.print(nodo.elemento + " ");
-    }
-
-    public void emOrdem(Nodo nodo) {
-
-        if (nodo == null)
-            return;
-
-        this.emOrdem(nodo.esquerdo);
-        System.out.print(nodo.elemento.toString() + " ");
-        this.emOrdem(nodo.direito);
-    }
-
-    private Nodo maiorElemento(Nodo nodo) {
-        while (nodo.direito != null) {
-            nodo = nodo.direito;
-        }
-        return nodo;
-    }
-
-    private Nodo menorElemento(Nodo nodo) {
-        while (nodo.esquerdo != null) {
-            nodo = nodo.esquerdo;
-        }
-        return nodo;
-    }
-
-    public boolean remove(PalavraChave elemento) {
-        return this.remove(elemento, this.raiz) != null;
-    }
-
-    private Nodo remove(PalavraChave elemento, Nodo nodo) {
-
-        if (nodo == null) {
-            System.out.println("Valor não encontrado");
-            return null;
-        }
-
-        int comparacao = elemento.getChave().compareTo(nodo.elemento.getChave());
-
-        if (comparacao < 0) {
-            nodo.esquerdo = this.remove(elemento, nodo.esquerdo);
-        } else if (comparacao > 0) {
-            nodo.direito = this.remove(elemento, nodo.direito);
-        } else {
-
-            if (nodo.esquerdo == null) {
-                this.nElementos--;
-                return nodo.direito;
-            } else if (nodo.direito == null) {
-                this.nElementos--;
-                return nodo.esquerdo;
-            } else {
-                Nodo substituto = this.menorElemento(nodo.direito);
-                nodo.elemento = substituto.elemento;
-                this.remove(substituto.elemento, nodo.direito);
-            }
-        }
-
-        return nodo;
-    }
-    private int altura(Nodo nodo) {
-
-        if (nodo == null) {
-            return -1;
-        }
-
-        int alturaEsquerda = this.altura(nodo.esquerdo) + 1;
-        int alturaDireita = this.altura(nodo.direito) + 1;
-
-        int altura = alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita;
-
-        return altura;
-
-    }
-
-    public int altura() {
-        return this.altura(this.raiz);
+        this.emOrdem(nodo.esquerdo, writer);
+        writer.println(nodo.elemento);
+        this.emOrdem(nodo.direito, writer);
     }
 }

@@ -1,17 +1,17 @@
 public class PalavraChave {
     private String chave;
-    private Lista ocorrencias;
+    private ListaEncadeada ocorrencias;
 
     public PalavraChave(String elemento) {
         this.chave = elemento;
-        this.ocorrencias = new Lista(99);
+        this.ocorrencias = new ListaEncadeada();
     }
 
     public String getChave() {
         return chave;
     }
 
-    public Lista getOcorrencias() {
+    public ListaEncadeada getOcorrencias() {
         return ocorrencias;
     }
 
