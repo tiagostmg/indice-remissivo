@@ -21,6 +21,7 @@ public class Main {
                 String linha = scannerPalavras.nextLine();
                 String[] palavras = linha.trim().split(" ");
                 for (String palavra : palavras) {
+                    palavra = normalize(palavra);
                     hash.insere(palavra);
                 }
             }
@@ -42,6 +43,7 @@ public class Main {
 //                if(linha.trim().isEmpty()) continue;
                 String[] palavras = linha.trim().split(" ");
                 for (String palavra : palavras) {
+                    palavra = normalize(palavra);
                     hash.buscarPalavraChaveERegistrarOcorrencia(palavra, linhaNum);
                 }
                 linhaNum++;
@@ -51,5 +53,19 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo texto.txt não encontrado.");
         }
+    }
+    private static String normalize(String texto) {
+        if (texto == null || texto.isEmpty()) {
+            return "";
+        }
+
+        texto = texto.toLowerCase();
+
+        texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
+        texto = texto.replaceAll("\\p{M}", "");
+
+        texto = texto.replaceAll("[^a-z0-9-]", "");
+
+        return texto;
     }
 }

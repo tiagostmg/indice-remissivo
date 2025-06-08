@@ -13,7 +13,6 @@ public class TabelaHash {
     }
 
     public int hash(String string) {
-        string = normaliza(string);
         if(string.isEmpty()){
             return -1;
         }
@@ -31,8 +30,6 @@ public class TabelaHash {
             this.vetor[chave] = new ArvoreBinariaBusca();
         }
 
-        palavraChave = normaliza(palavraChave);
-
         this.vetor[chave].insere(palavraChave);
 
         this.nElementos++;
@@ -43,26 +40,10 @@ public class TabelaHash {
         if(chave == -1){
             return;
         }
-        palavraChave = normaliza(palavraChave);
         if(this.vetor[chave] != null) {
             ArvoreBinariaBusca arvore = this.vetor[chave];
             arvore.registrarOcorrencia(palavraChave, linha);
         }
-    }
-
-    private String normaliza(String texto) {
-        if (texto == null || texto.isEmpty()) {
-            return "";
-        }
-
-        texto = texto.toLowerCase();
-
-        texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
-        texto = texto.replaceAll("\\p{M}", "");
-
-        texto = texto.replaceAll("[^a-z0-9-]", "");
-
-        return texto;
     }
 
     public void imprime() {
