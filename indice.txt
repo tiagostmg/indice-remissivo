@@ -1,29 +1,8 @@
-abstraction 4
-agile 9
-algorithms 2
-clean 3
-code 1 3 12
-collaboration 8
-computer 4 11
-control 8
-data 2
-debugging 7
-development 3
-documentation 6
-efficient 2
-human-engineered 6
-logic 4
-maintainable 3
-modularity 6
-optimization 7
-performance 8
-practices 4
-programming 1 11
-readable 3
-reliable
-science 4
-scrum 9
-software 3 6
-structures 2
-testing 6
-version 8
+and 4 5 6
+be 3
+by 2 6 7
+easy 3 4
+human-engineered 5
+programming 1 7
+programs 3
+to 3 4

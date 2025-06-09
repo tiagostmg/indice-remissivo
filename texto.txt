@@ -1,13 +1,7 @@
-Good programming is not just about writing code; it's about crafting
-efficient algorithms and using proper data structures to solve problems.
-Clean code is readable, maintainable, and follows best software development
-practices. Computer science teaches us the importance of logic and abstraction.
-
-Human-engineered software focuses on modularity, documentation, and testing
-to ensure reliability. Debugging and optimization are key steps in improving
-performance. Version control systems like Git help in collaboration among
-developers, especially in Agile and Scrum methodologies.
-
-Remember: programming is not just about making the computer understand your
-code, but also about making it understandable for other humans. Always aim
-for clarity and efficiency in your implementations.
+Good programming is not learned from
+generalities, but by seeing how significant
+programs can be made clean, easy to
+read, easy to maintain and modify,
+human-engineered, efficient, and reliable,
+by the application of common sense and
+by the use of good programming practices.
