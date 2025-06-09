@@ -8,10 +8,10 @@
 
 ### 📌 Funcionalidades
 
-* ✔ Leitura de palavras-chave (arquivo palavras-chave.txt)
+* ✔ Leitura de palavras-chave (arquivo chaves.txt)
 * ✔ Processamento de texto (arquivo texto.txt)
 * ✔ Registro de ocorrências (linhas onde cada palavra aparece)
-* ✔ Geração do índice remissivo (arquivo output.txt)
+* ✔ Geração do índice remissivo (arquivo indice.txt)
 
 
 ### ⚙️ Estruturas Utilizadas
@@ -25,7 +25,7 @@ Lista	Encadeada | Guarda os números das linhas de ocorrência
 ```
 src/  
 ├── ArvoreBinariaBusca.java  # Árvore para armazenar palavras  
-├── ListaEncadeada.java               # Lista de ocorrências (linhas)  
+├── ListaEncadeada.java      # Lista de ocorrências (linhas)  
 ├── Main.java                # Ponto de entrada do programa  
 ├── PalavraChave.java        # Model palavra + linhas  
 └── TabelaHash.java          # Tabela Hash principal  
@@ -37,7 +37,7 @@ src/
 * Adicionar as palavras chave e o texto
 * Executar
 
-📝 Exemplo de Saída
+📝 Exemplo
 
 #### Entrada 
 
@@ -48,13 +48,13 @@ Programação é sobre estruturas de dados.
 Estruturas organizam dados eficientemente.  
 ```
 
-##### (palavras-chave.txt)
+##### (chaves.txt)
 
 ```
-dados, estrutura, programação
+dados estrutura programação
 ```
 
-#### Saída (output.txt)
+#### Saída (indice.txt)
 ```
 dados 1 2 
 estruturas 1 2 
