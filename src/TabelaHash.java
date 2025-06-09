@@ -13,18 +13,14 @@ public class TabelaHash {
     }
 
     public int hash(String string) {
-        if(string.isEmpty()){
-            return -1;
-        }
         return string.charAt(0) - 'a';
     }
 
     public void insere(String palavraChave) {
-        int chave = hash(palavraChave);
-
-        if(chave == -1){
+        if(palavraChave.isEmpty()) {
             return;
         }
+        int chave = hash(palavraChave);
 
         if(this.vetor[chave] == null) {
             this.vetor[chave] = new ArvoreBinariaBusca();
@@ -36,10 +32,11 @@ public class TabelaHash {
     }
 
     public void buscarPalavraChaveERegistrarOcorrencia(String palavraChave, int linha) {
-        int chave = hash(palavraChave);
-        if(chave == -1){
+        if(palavraChave.isEmpty()) {
             return;
         }
+        int chave = hash(palavraChave);
+
         if(this.vetor[chave] != null) {
             ArvoreBinariaBusca arvore = this.vetor[chave];
             arvore.registrarOcorrencia(palavraChave, linha);
@@ -47,7 +44,7 @@ public class TabelaHash {
     }
 
     public void imprime() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("output.txt"))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("indice.txt"))) {
             for (ArvoreBinariaBusca arvoreBinariaBusca : vetor) {
                 if (arvoreBinariaBusca != null && !arvoreBinariaBusca.estaVazia()) {
                     arvoreBinariaBusca.imprimeEmOrdem(writer);

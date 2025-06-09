@@ -14,7 +14,7 @@ public class Main {
 
     private static void lerPalavrasChave(TabelaHash hash) {
         try {
-            File arquivoPalavras = new File("palavras-chave.txt");
+            File arquivoPalavras = new File("chaves.txt");
             Scanner scannerPalavras = new Scanner(arquivoPalavras);
 
             while (scannerPalavras.hasNextLine()) {
@@ -28,7 +28,7 @@ public class Main {
 
             scannerPalavras.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo palavras-chave.txt não encontrado.");
+            System.out.println("Arquivo chaves.txt não encontrado.");
         }
     }
 
