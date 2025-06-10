@@ -64,7 +64,7 @@ public class Main {
         texto = java.text.Normalizer.normalize(texto, java.text.Normalizer.Form.NFD);
         texto = texto.replaceAll("\\p{M}", "");
 
-        texto = texto.replaceAll("[^a-z0-9-]", "");
+        texto = texto.replaceAll("[^a-z-]", "");
 
         return texto;
     }
